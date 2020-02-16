@@ -1,0 +1,8 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  password: postgres
+  host: <%= ENV['DB_HOST'] %>
+  pool: 5
+  database: ci_db
