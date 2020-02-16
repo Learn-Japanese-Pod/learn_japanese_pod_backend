@@ -14,24 +14,22 @@ variables:
   DB_HOST: postgres
 
 before_script:
-# Project setup
-  # Check if the dependencies are ok, if not install what is missing
   - bundle check || bundle install --jobs $(nproc)
   - bundle exec rails db:create RAILS_ENV=test
   - bundle exec rails db:schema:load RAILS_ENV=test
 
-  stages:
-    - test
-    - lint
+stages:
+  - test
+  - lint
 
-  Tests:
-    stage: test
-    script:
-      - bundle exec rspec
+Tests:
+  stage: test
+  script:
+    - bundle exec rspec
 
-  Rubocop:
-    stage: lint
-    except:
-      - master
-    script:
-      - bundle exec rubocop
+Rubocop:
+  stage: lint
+  except:
+    - master
+  script:
+    - bundle exec rubocop
