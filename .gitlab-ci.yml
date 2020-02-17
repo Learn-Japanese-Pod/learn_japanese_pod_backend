@@ -1,0 +1,67 @@
+# This file is a template, and might need editing before it works on your project.
+# Official language image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/ruby/tags/
+image: "ruby:2.7"
+
+# Pick zero or more services to be used on all builds.
+# Only needed when using a docker container to run your tests in.
+# Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-a-service
+services:
+  - postgres:12
+
+variables:
+  POSTGRES_DB: learn_japanese_pod_backend_test
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "postgres"
+
+# Cache gems in between builds
+cache:
+  paths:
+    - vendor/ruby
+
+# This is a basic example for a gem or script which doesn't use
+# services such as redis or postgres
+before_script:
+  - ruby -v  # Print out ruby version for debugging
+  - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
+
+stages:
+  - spec_and_lint
+  - deploy
+
+Rubocop:
+  stage: spec_and_lint
+  script:
+    - bundle exec rubocop
+
+Rspec:
+  stage: spec_and_lint
+  variables:
+    DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
+  script:
+    - bundle exec rails db:create
+    - bundle exec rake db:schema:load
+    - bundle exec rspec spec
+
+# This deploy job uses a simple deploy flow to Heroku, other providers, e.g. AWS Elastic Beanstalk
+# are supported too: https://github.com/travis-ci/dpl
+
+Production:
+  stage: deploy
+  environment:
+    name: production
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
+  only: 
+    - master
+  when: manual
+
+Staging:
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
+  when: manual
