@@ -52,7 +52,7 @@ Production:
     name: production
   script:
     - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
+    - dpl --provider=heroku --app=learn-japanese-pod-production --api-key=$HEROKU_PRODUCTION_KEY
   only: 
     - master
   when: manual
@@ -63,5 +63,5 @@ Staging:
     name: staging
   script:
     - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
+    - dpl --provider=heroku --app=learn-japanese-pod-staging --api-key=$HEROKU_STAGING_KEY
   when: manual
