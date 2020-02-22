@@ -5,12 +5,11 @@ class PushNotification::Sender
     @client = client
   end
 
-  def send(title:, body:, to:)
+  def send(body:, to:)
     Rails.logger.info("SENDING PUSH NOTIFICATION TO: #{to}")
 
     tickets = client.publish(
       to: to,
-      title: title,
       body: body,
     )
 

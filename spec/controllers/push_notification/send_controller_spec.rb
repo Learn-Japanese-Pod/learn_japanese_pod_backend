@@ -18,7 +18,7 @@ describe PushNotifications::SendController, type: :controller do
 
         expect(PushNotification::Sender).not_to receive(:send)
 
-        post :create, params: { push_token: push_token, title: "Title", body: "Body" }
+        post :create, params: { push_token: push_token, body: "Body" }
        
         expect(response.status).to eq(404)
       end
@@ -32,10 +32,10 @@ describe PushNotifications::SendController, type: :controller do
 
         expect_any_instance_of(PushNotification::Sender)
           .to receive(:send)
-          .with(to: push_token, title: "Title", body: "Body")
+          .with(to: push_token, body: "Body")
           .once
 
-        post :create, params: { push_token: push_token, title: "Title", body: "Body" }
+        post :create, params: { push_token: push_token, body: "Body" }
 
         expect(response.status).to eq(200)
       end
