@@ -3,7 +3,7 @@ require 'rails_helper'
 describe PushNotification::Sender do
   subject { described_class.new(client: mock_client) }
 
-  let(:mock_client) { instance_double(Exponent::Push::Client, publish: nil) }
+  let(:mock_client) { instance_double(Exponent::Push::Client, publish: []) }
 
   describe "#send" do
     let(:to) { "Token[abc123]" }

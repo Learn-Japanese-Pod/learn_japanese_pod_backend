@@ -7,7 +7,7 @@ class Users::PushTokensController < ApplicationController
       .create
 
     if user.valid?
-      render json: { body: "success" }, status: 200
+      render json: { message: "success" }, status: 200
     else
       render json: { errors: user.errors }, status: 400
     end

@@ -6,11 +6,16 @@ class PushNotification::Sender
   end
 
   def send(title:, body:, to:)
-    client.publish(
+    Rails.logger.info("SENDING PUSH NOTIFICATION TO: #{to}")
+
+    tickets = client.publish(
       to: to,
       title: title,
       body: body,
     )
+
+    Rails.logger.info("RESPONSE FROM NOTIFICATION SENT TO: #{to}") 
+    Rails.logger.info(tickets.to_s)
   end
 
   def send_batch(batch:)
