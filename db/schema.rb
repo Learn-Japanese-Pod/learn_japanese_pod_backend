@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_16_101454) do
+ActiveRecord::Schema.define(version: 2020_02_21_120019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "update_tracker", force: :cascade do |t|
+    t.string "feed_name", null: false
+    t.datetime "last_episode_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "push_token"
