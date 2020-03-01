@@ -18,6 +18,11 @@ class PushNotification::Sender
   end
 
   def send_batch(batch:)
-    client.publish(batch)
+    Rails.logger.info("SENDING PUSH NOTIFICATION TO BATCH: #{batch}")
+
+    tickets = client.publish(batch)
+
+    Rails.logger.info("RESPONSE FROM NOTIFICATION SENT TO BATCH") 
+    Rails.logger.info(tickets.to_s)
   end
 end
