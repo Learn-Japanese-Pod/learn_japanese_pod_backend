@@ -1,6 +1,6 @@
 class PushNotification::NewEpisodeNotifier
   NOTIFICATION_CUTOFF_DATE = Time.parse("2020-03-08 00:00:00 +0000")
-  LESSON_MESSAGE = "New lesson out now."
+  LESSON_MESSAGE = "New podcast out now."
   FUN_FRIDAY_MESSAGE = "New fun friday out now."
   NOTIFICATION_MESSAGES = {
     lesson: LESSON_MESSAGE,

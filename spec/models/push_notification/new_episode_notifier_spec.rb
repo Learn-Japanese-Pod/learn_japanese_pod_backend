@@ -84,7 +84,7 @@ describe PushNotification::NewEpisodeNotifier do
     context "when the notifier runs for the first time" do
       it "does not try to send any notifications" do
         batch = tokens.map do |token| 
-          { to: token, body: "New lesson out now." }
+          { to: token, body: "New podcast out now." }
         end
 
         expect(push_notification_sender)
@@ -121,7 +121,7 @@ describe PushNotification::NewEpisodeNotifier do
       context "and new episode has a lesson category" do
         it "sends a lesson notification out" do
           batch = tokens.map do |token| 
-            { to: token, body: "New lesson out now." }
+            { to: token, body: "New podcast out now." }
           end
 
           expect(push_notification_sender)
