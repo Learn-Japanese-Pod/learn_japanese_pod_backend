@@ -12,7 +12,7 @@ describe PushNotification::Sender do
     it "calls #publish on client with the given params" do
       subject.send(to: to, body: body)
 
-      expect(mock_client).to have_received(:publish).with({ to: to, body: body })
+      expect(mock_client).to have_received(:publish).with({ to: to, body: body, _displayInForeground: true })
     end
   end
 

@@ -11,6 +11,7 @@ class PushNotification::Sender
     tickets = client.publish(
       to: to,
       body: body,
+      _displayInForeground: true,
     )
 
     Rails.logger.info("RESPONSE FROM NOTIFICATION SENT TO: #{to}") 
