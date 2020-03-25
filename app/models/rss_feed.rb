@@ -20,7 +20,7 @@ class RssFeed
     end
   end
    
-  RSS_URL="http://feeds.feedburner.com/LJPPodcasts2020"
+  RSS_URL="http://feeds.feedburner.com/learnjapanesepod"
 
   def items
     @items ||= build_items
